@@ -38,7 +38,7 @@ function monitorPath() {
 
 function blockFeed() {
 	// monitors the news feed for changes and blocks anything matching the block rawKeywords
-	if (keywords.length === 0 || keywords[0] === '') {
+	if (keywords.length === 0) {
 		return;
 	}
 
@@ -49,6 +49,9 @@ function blockFeed() {
 			$(this).find(".userContent").each(function() {
 				var content = $(this).text();
 				for (var i = 0; i < keywords.length; i++) {
+					if (keywords[i] === '') {
+						continue;
+					}
 					var re = new RegExp(keywords[i], "i");
 					if (content.match(re)) {
 						$(story).hide();
